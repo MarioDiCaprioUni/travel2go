@@ -1,6 +1,14 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
+import {ThemeProvider} from "@mui/material";
+import {lightTheme} from "@/theme";
 
+
+// noinspection JSUnusedGlobalSymbols
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+    return (
+        <ThemeProvider theme={lightTheme}>
+            <Component {...pageProps} />
+        </ThemeProvider>
+    );
 }
