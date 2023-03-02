@@ -4,11 +4,10 @@ import {styled} from "@mui/material";
 export const Context = styled('div')`
   width: 100vw;
   height: 75px;
-  position: fixed;
-  top: 0;
-  left: 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 0 50px 0 50px;
 `;
 
 export const Logo = styled('div')`

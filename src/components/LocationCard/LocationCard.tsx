@@ -31,8 +31,8 @@ const LocationCard: React.FC<LocationCardProps> = (props) => {
 
             </CardContent>
 
-            <CardActions sx={{ position: 'absolute', left: 0, bottom: 0, padding: 2 }}>
-                { props.tags.map(tag => <Chip label={tag} />) }
+            <CardActions sx={{ position: 'absolute', left: 0, bottom: 0, padding: 2, display: 'flex', flexWrap: 'wrap' }}>
+                { props.tags.map(tag => <Chip key={tag} label={tag} sx={{ margin: '5px', padding: '5px' }} />) }
             </CardActions>
 
         </Card>
