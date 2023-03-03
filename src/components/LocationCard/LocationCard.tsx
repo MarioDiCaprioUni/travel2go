@@ -2,7 +2,7 @@ import React from "react";
 import {Card, CardActions, CardContent, CardMedia, Chip, Typography} from "@mui/material";
 
 
-interface LocationCardProps {
+export interface LocationCardProps {
     thumbnailLink: string;
     title: string;
     tooltip: string;
