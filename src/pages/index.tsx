@@ -2,6 +2,7 @@ import {NextPage} from "next";
 import Navbar from "@/components/Navbar/Navbar";
 import {CardPanel, Content} from "@/styles/Index.styles";
 import LocationCard, {LocationCardProps} from "@/components/LocationCard/LocationCard";
+import Head from "next/head";
 
 
 const locations: Array<LocationCardProps> = [
@@ -53,6 +54,10 @@ const locations: Array<LocationCardProps> = [
 const Index: NextPage = () => {
     return (
         <>
+
+            <Head>
+                <title>Travel2Go</title>
+            </Head>
 
             <Navbar />
 
