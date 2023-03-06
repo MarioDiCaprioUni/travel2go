@@ -7,7 +7,7 @@ const Navbar: React.FC = () => {
         <Context>
 
             <Logo>
-                Travel2Go
+                <img src="/logo.png" alt="TRAVEL2GO" style={{ width: "300px" }} />
             </Logo>
 
             <Links>
