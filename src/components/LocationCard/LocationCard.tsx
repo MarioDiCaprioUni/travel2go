@@ -1,17 +1,21 @@
 import React from "react";
-import {Card, CardActions, CardContent, CardMedia, Chip, Typography} from "@mui/material";
+import {CardContent, CardMedia, IconButton, TableBody, TableCell, TableContainer, TableRow} from "@mui/material";
+import {Content, Context, OverviewTable, Actions, Title} from "./LocationCard.styles";
+import {BsThreeDots as DotsIcon} from "react-icons/bs";
 
 
 export interface LocationCardProps {
     thumbnailLink: string;
     title: string;
     tooltip: string;
+    dailyUSD: number;
+    trivagoLink: string;
     tags: string[];
 }
 
 const LocationCard: React.FC<LocationCardProps> = (props) => {
     return (
-        <Card variant="outlined" sx={{ width: 300, height: 415, position: 'relative' }}>
+        <Context>
 
             <CardMedia
                 title={props.tooltip}
@@ -21,21 +25,49 @@ const LocationCard: React.FC<LocationCardProps> = (props) => {
 
             <CardContent>
 
-                <Typography gutterBottom variant="h5" component="div">
+                <Title>
                     { props.title }
-                </Typography>
+                </Title>
 
-                <Typography variant="body2">
+                <Content>
 
-                </Typography>
+                    <TableContainer>
+                        <OverviewTable>
+                            <TableBody>
+
+                                <TableRow>
+                                    <TableCell>
+                                        Cost per Day
+                                    </TableCell>
+                                    <TableCell>
+                                        { props.dailyUSD } USD
+                                    </TableCell>
+                                </TableRow>
+
+                                <TableRow>
+                                    <TableCell>
+                                        Distance
+                                    </TableCell>
+                                    <TableCell>
+                                        123 km
+                                    </TableCell>
+                                </TableRow>
+
+                            </TableBody>
+                        </OverviewTable>
+                    </TableContainer>
+
+                </Content>
 
             </CardContent>
 
-            <CardActions sx={{ position: 'absolute', left: 0, bottom: 0, padding: 2, display: 'flex', flexWrap: 'wrap' }}>
-                { props.tags.map(tag => <Chip key={tag} clickable label={tag} sx={{ margin: '5px', padding: '5px' }} />) }
-            </CardActions>
+            <Actions>
+                <IconButton>
+                    <DotsIcon />
+                </IconButton>
+            </Actions>
 
-        </Card>
+        </Context>
     );
 }
 
