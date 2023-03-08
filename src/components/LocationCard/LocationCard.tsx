@@ -9,9 +9,16 @@ import {
     TableContainer,
     TableRow
 } from "@mui/material";
-import {Content, Context, OverviewTable, Actions, Title} from "./LocationCard.styles";
+import {Actions, Content, Context, OverviewTable, Title} from "./LocationCard.styles";
 import {BsThreeDots as DotsIcon} from "react-icons/bs";
-import {geolocation} from "@/utils/metrics";
+import {
+    convertCurrency,
+    convertMeasurement,
+    Currency,
+    geolocation,
+    getCurrencySymbol, getMeasurementUnit,
+    Measurement
+} from "@/utils/metrics";
 import {useSelector} from "react-redux";
 import {RootState} from "@/redux/store";
 
@@ -20,11 +27,12 @@ export interface LocationCardProps {
     thumbnailLink: string;
     title: string;
     tooltip: string;
-    dailyUSD: number;
+    dailyEuros: number;
     coords: geolocation.GeolocationPoint;
 }
 
 const LocationCard: React.FC<LocationCardProps> = (props) => {
+    const { currency, measurement } = useSelector((state: RootState) => state.metrics);
     const { coords, isAvailable, isEnabled } = useSelector((state: RootState) => state.geolocation);
 
     let geolocationErrorMsg = undefined;
@@ -60,7 +68,8 @@ const LocationCard: React.FC<LocationCardProps> = (props) => {
                                         Cost per Day
                                     </TableCell>
                                     <TableCell>
-                                        { props.dailyUSD } USD
+                                        { Math.round(convertCurrency(props.dailyEuros, Currency.EURO, currency)) }
+                                        { ' ' + getCurrencySymbol(currency) }
                                     </TableCell>
                                 </TableRow>
 
@@ -80,7 +89,12 @@ const LocationCard: React.FC<LocationCardProps> = (props) => {
                                                         Loading...
                                                     </Button>
                                                     :
-                                                    Math.round(geolocation.geolocationDistance(coords, props.coords)) + " km"
+                                                    Math.round(
+                                                        convertMeasurement(
+                                                            geolocation.geolocationDistance(coords, props.coords),
+                                                            Measurement.METRIC, measurement
+                                                        )
+                                                    ) + ' ' + getMeasurementUnit(measurement)
                                         }
                                     </TableCell>
                                 </TableRow>

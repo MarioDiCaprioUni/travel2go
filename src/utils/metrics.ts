@@ -1,3 +1,55 @@
+export enum Currency {
+    EURO = "EURO",
+    USD = "USD"
+}
+
+export enum Measurement {
+    METRIC = "METRIC",
+    IMPERIAL = "IMPERIAL"
+}
+
+const CURRENCY_CONVERSION_MAP: Record<Currency, number> = {
+    EURO: 1,
+    USD: 1.05
+}
+
+const KILOMETER_TO_MILES = 0.621371;
+
+export function convertCurrency(value: number, from: Currency, to: Currency): number {
+    return value / CURRENCY_CONVERSION_MAP[from] * CURRENCY_CONVERSION_MAP[to];
+}
+
+export function getCurrencySymbol(currency: Currency): string {
+    switch (currency) {
+        case Currency.EURO:
+            return 'EUR';
+        case Currency.USD:
+            return 'USD';
+    }
+}
+
+export function convertMeasurement(value: number, from: Measurement, to: Measurement): number {
+    if (from === to) {
+        return value;
+    } else if (from === Measurement.METRIC) {
+        return value * KILOMETER_TO_MILES;
+    } else {
+        return value / KILOMETER_TO_MILES;
+    }
+}
+
+export function getMeasurementUnit(measurement: Measurement): string {
+    switch (measurement) {
+        case Measurement.METRIC:
+            return "km";
+        case Measurement.IMPERIAL:
+            return "mi";
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+
 namespace geolocation {
 
     const EARTH_RADIUS_KM = 6371;
