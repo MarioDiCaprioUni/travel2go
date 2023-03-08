@@ -1,7 +1,19 @@
 import React from "react";
-import {CardContent, CardMedia, IconButton, TableBody, TableCell, TableContainer, TableRow} from "@mui/material";
+import {
+    Button,
+    CardContent,
+    CardMedia,
+    IconButton,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableRow
+} from "@mui/material";
 import {Content, Context, OverviewTable, Actions, Title} from "./LocationCard.styles";
 import {BsThreeDots as DotsIcon} from "react-icons/bs";
+import {geolocation} from "@/utils/metrics";
+import {useSelector} from "react-redux";
+import {RootState} from "@/redux/store";
 
 
 export interface LocationCardProps {
@@ -9,11 +21,19 @@ export interface LocationCardProps {
     title: string;
     tooltip: string;
     dailyUSD: number;
-    trivagoLink: string;
-    tags: string[];
+    coords: geolocation.GeolocationPoint;
 }
 
 const LocationCard: React.FC<LocationCardProps> = (props) => {
+    const { coords, isAvailable, isEnabled } = useSelector((state: RootState) => state.geolocation);
+
+    let geolocationErrorMsg = undefined;
+    if (!isAvailable) {
+        geolocationErrorMsg = "Geolocation unavailable";
+    } else if (!isEnabled) {
+        geolocationErrorMsg = "Geolocation disabled";
+    }
+
     return (
         <Context>
 
@@ -49,7 +69,19 @@ const LocationCard: React.FC<LocationCardProps> = (props) => {
                                         Distance
                                     </TableCell>
                                     <TableCell>
-                                        123 km
+                                        {
+                                            geolocationErrorMsg?
+                                                <Button color="error" variant="contained">
+                                                    { geolocationErrorMsg }
+                                                </Button>
+                                                :
+                                                !coords?
+                                                    <Button color="primary" variant="contained">
+                                                        Loading...
+                                                    </Button>
+                                                    :
+                                                    Math.round(geolocation.geolocationDistance(coords, props.coords)) + " km"
+                                        }
                                     </TableCell>
                                 </TableRow>
 
