@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
             <Toolbar>
 
                 <Logo>
-                    <img src="/logo.png" alt="TRAVEL2GO" style={{ width: "300px" }} />
+                    <img src="/logo.png" alt="TRAVEL2GO" />
                 </Logo>
 
                 <IconButton onClick={toggleSidebar}>

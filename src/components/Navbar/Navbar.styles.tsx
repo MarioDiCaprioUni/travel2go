@@ -11,4 +11,7 @@ export const Context = styled(AppBar)`
 export const Logo = styled('div')`
   display: flex;
   flex-grow: 1;
+  img {
+    width: clamp(100px, 60vw, 300px);
+  }
 `;
