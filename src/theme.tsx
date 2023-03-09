@@ -1,5 +1,5 @@
 import React, {ReactNode} from "react";
-import {createTheme, useMediaQuery, ThemeProvider as MuiThemeProvider} from "@mui/material";
+import {createTheme, useMediaQuery, ThemeProvider as MuiThemeProvider, CssBaseline} from "@mui/material";
 import {useSelector} from "react-redux";
 import {RootState} from "@/redux/store";
 
@@ -65,6 +65,7 @@ export const ThemeProvider: React.FC<{ children?: ReactNode }> = ({ children }) 
 
     return (
         <MuiThemeProvider theme={theme}>
+            { typeof window !== 'undefined' && <CssBaseline /> }
             { children }
         </MuiThemeProvider>
     );
