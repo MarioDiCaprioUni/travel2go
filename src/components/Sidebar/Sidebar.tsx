@@ -1,11 +1,12 @@
 import React from "react";
-import {FormControl, FormControlLabel, Radio, RadioGroup, Typography} from "@mui/material";
+import {Divider, FormControl, FormControlLabel, IconButton, Radio, RadioGroup, Typography} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/redux/store";
-import {Context} from "./Sidebar.styles";
+import {Context, Header, Section} from "./Sidebar.styles";
 import {setTheme} from "@/redux/slices/themeSlice";
 import {Currency, Measurement} from "@/utils/metrics";
 import {setUserMetrics} from "@/redux/slices/metricsSlice";
+import {IoClose as CloseIcon} from "react-icons/io5";
 
 
 interface SidebarProps {
@@ -46,47 +47,63 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
     return (
         <Context open={open} onClose={onClose} anchor="right">
 
-            <Typography variant="h5" color="primary">
-                Currency
-            </Typography>
+            <Header>
+                <IconButton onClick={onClose}>
+                    <CloseIcon />
+                </IconButton>
+            </Header>
 
-            <FormControl>
-                <RadioGroup value={currency} onChange={handleCurrencySelection}>
+            <Divider />
 
-                    <FormControlLabel value={Currency.EURO} control={<Radio />} label="Euro" />
-                    <FormControlLabel value={Currency.USD} control={<Radio />} label="USD" />
+            <Section>
+                <Typography variant="h5" color="primary">
+                    Currency
+                </Typography>
 
-                </RadioGroup>
-            </FormControl>
+                <FormControl>
+                    <RadioGroup value={currency} onChange={handleCurrencySelection}>
 
+                        <FormControlLabel value={Currency.EURO} control={<Radio />} label="Euro" />
+                        <FormControlLabel value={Currency.USD} control={<Radio />} label="USD" />
 
-            <Typography variant="h5" color="primary">
-                Measurements
-            </Typography>
+                    </RadioGroup>
+                </FormControl>
+            </Section>
 
-            <FormControl>
-                <RadioGroup value={measurement} onChange={handleMeasurementSelection}>
+            <Divider />
 
-                    <FormControlLabel value={Measurement.METRIC} control={<Radio />} label="Metric" />
-                    <FormControlLabel value={Measurement.IMPERIAL} control={<Radio />} label="Imperial" />
+            <Section>
+                <Typography variant="h5" color="primary">
+                    Measurements
+                </Typography>
 
-                </RadioGroup>
-            </FormControl>
-            
+                <FormControl>
+                    <RadioGroup value={measurement} onChange={handleMeasurementSelection}>
 
-            <Typography variant="h5" color="primary">
-                Theme
-            </Typography>
+                        <FormControlLabel value={Measurement.METRIC} control={<Radio />} label="Metric" />
+                        <FormControlLabel value={Measurement.IMPERIAL} control={<Radio />} label="Imperial" />
 
-            <FormControl>
-                <RadioGroup value={theme} onChange={handleThemeSelection}>
+                    </RadioGroup>
+                </FormControl>
+            </Section>
 
-                    <FormControlLabel value="light" control={<Radio />} label="Light" />
-                    <FormControlLabel value="dark" control={<Radio />} label="Dark" />
-                    <FormControlLabel value="device" control={<Radio />} label="Device Default" />
+            <Divider />
 
-                </RadioGroup>
-            </FormControl>
+            <Section>
+                <Typography variant="h5" color="primary">
+                    Theme
+                </Typography>
+
+                <FormControl>
+                    <RadioGroup value={theme} onChange={handleThemeSelection}>
+
+                        <FormControlLabel value="light" control={<Radio />} label="Light" />
+                        <FormControlLabel value="dark" control={<Radio />} label="Dark" />
+                        <FormControlLabel value="device" control={<Radio />} label="Device Default" />
+
+                    </RadioGroup>
+                </FormControl>
+            </Section>
 
         </Context>
     );
