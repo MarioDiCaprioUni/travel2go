@@ -37,9 +37,9 @@ const LocationCard: React.FC<LocationCardProps> = (props) => {
 
     let geolocationErrorMsg = undefined;
     if (!isAvailable) {
-        geolocationErrorMsg = "Geolocation unavailable";
+        geolocationErrorMsg = "Unavailable";
     } else if (!isEnabled) {
-        geolocationErrorMsg = "Geolocation disabled";
+        geolocationErrorMsg = "Disabled";
     }
 
     return (

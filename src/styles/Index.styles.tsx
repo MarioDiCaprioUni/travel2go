@@ -1,4 +1,5 @@
 import {styled} from "@mui/material";
+import {motion} from "framer-motion";
 
 
 export const Content = styled('div')`
@@ -10,7 +11,7 @@ export const Content = styled('div')`
 `;
 
 
-export const CardPanel = styled('div')`
+export const CardPanel = styled(motion.div)`
   width: 100%;
   max-width: 1100px;
   display: flex;

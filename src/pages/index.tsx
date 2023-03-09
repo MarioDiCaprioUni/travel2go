@@ -1,12 +1,10 @@
 import {NextPage} from "next";
 import Navbar from "@/components/Navbar/Navbar";
 import {CardPanel, Content} from "@/styles/Index.styles";
-import {LocationCardProps} from "@/components/LocationCard/LocationCard";
+import LocationCard, {LocationCardProps} from "@/components/LocationCard/LocationCard";
 import Head from "next/head";
-import dynamic from "next/dynamic";
 import Credentials from "@/components/Credentials/Credentials";
-
-const LocationCard = dynamic(() => import("@/components/LocationCard/LocationCard"), { ssr: false });
+import {motion, Variants} from "framer-motion";
 
 
 const locations: Array<LocationCardProps> = [
@@ -83,6 +81,18 @@ const locations: Array<LocationCardProps> = [
 ];
 
 
+const cardVariants: Variants = {
+    before: {
+        opacity: 0,
+        translateY: -50
+    },
+    after: {
+        opacity: 1,
+        translateY: 0
+    }
+}
+
+
 const Index: NextPage = () => {
     return (
         <>
@@ -95,9 +105,21 @@ const Index: NextPage = () => {
 
             <Content>
 
-                <CardPanel>
+                <CardPanel
+                    initial="before"
+                    animate="after"
+                    transition={{ staggerChildren: 0.3 }}
+                >
 
-                    { locations.map(props => <LocationCard {...props} />) }
+                    {locations.map(props =>
+                        <motion.div
+                            key={props.title}
+                            variants={cardVariants}
+                            transition={{ duration: 0.5 }}
+                        >
+                            <LocationCard {...props} />
+                        </motion.div>
+                    )}
 
                 </CardPanel>
 
