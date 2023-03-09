@@ -4,6 +4,7 @@ import {CardPanel, Content} from "@/styles/Index.styles";
 import {LocationCardProps} from "@/components/LocationCard/LocationCard";
 import Head from "next/head";
 import dynamic from "next/dynamic";
+import Credentials from "@/components/Credentials/Credentials";
 
 const LocationCard = dynamic(() => import("@/components/LocationCard/LocationCard"), { ssr: false });
 
@@ -101,6 +102,8 @@ const Index: NextPage = () => {
                 </CardPanel>
 
             </Content>
+
+            <Credentials />
 
         </>
     );
