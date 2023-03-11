@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
     Button,
     CardContent,
@@ -21,10 +21,11 @@ import {
 } from "@/utils/metrics";
 import {useSelector} from "react-redux";
 import {RootState} from "@/redux/store";
+import ExtendedLocationCard from "@/components/ExtendedLocationCard/ExtendedLocationCard";
 
 
 export interface LocationCardProps {
-    thumbnailLink: string;
+    imageLinks: string[];
     title: string;
     tooltip: string;
     dailyEuros: number;
@@ -32,8 +33,17 @@ export interface LocationCardProps {
 }
 
 const LocationCard: React.FC<LocationCardProps> = (props) => {
+    const [isExtended, setIsExtended] = useState<boolean>(false);
     const { currency, measurement } = useSelector((state: RootState) => state.metrics);
     const { coords, isAvailable, isEnabled } = useSelector((state: RootState) => state.geolocation);
+
+    function handleOpenExtension() {
+        setIsExtended(true);
+    }
+
+    function handleCloseExtension() {
+        setIsExtended(false);
+    }
 
     let geolocationErrorMsg = undefined;
     if (!isAvailable) {
@@ -47,7 +57,7 @@ const LocationCard: React.FC<LocationCardProps> = (props) => {
 
             <CardMedia
                 title={props.tooltip}
-                image={props.thumbnailLink}
+                image={props.imageLinks[0]}
                 sx={{ height: 200 }}
             />
 
@@ -108,10 +118,12 @@ const LocationCard: React.FC<LocationCardProps> = (props) => {
             </CardContent>
 
             <Actions>
-                <IconButton>
+                <IconButton onClick={handleOpenExtension}>
                     <DotsIcon />
                 </IconButton>
             </Actions>
+
+            <ExtendedLocationCard {...props} open={isExtended} onClose={handleCloseExtension} />
 
         </Context>
     );
