@@ -1,4 +1,4 @@
-import {styled} from "@mui/material";
+import {styled, Table} from "@mui/material";
 import {Box} from "@mui/system";
 
 
@@ -18,4 +18,15 @@ export const Image = styled('img')`
   width: 100%;
   height: 100%;
   object-fit: cover;
+`;
+
+export const Title = styled('h3')`
+
+`;
+
+export const StyledTable = styled(Table)`
+  th {
+    background: #000000;
+    color: #ffffff;
+  }
 `;
