@@ -7,7 +7,7 @@ const Credentials: React.FC = () => {
         <Context>
             <Developer>
                 Designed & Developed by {' '}
-                <Link href="https://mariodicaprio.vercel.app" about="_blank">
+                <Link href="https://mariodicaprio.vercel.app" target="_blank" rel="noreferrer">
                     Mario Di Caprio
                 </Link>
             </Developer>
