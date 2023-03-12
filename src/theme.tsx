@@ -5,6 +5,9 @@ import {RootState} from "@/redux/store";
 
 
 const lightTheme = createTheme({
+    typography: {
+        fontFamily: `"Poppins", serif`
+    },
     palette: {
         mode: 'light',
         primary: {
@@ -27,6 +30,9 @@ const lightTheme = createTheme({
 
 
 const darkTheme = createTheme({
+    typography: {
+        fontFamily: `"Poppins", serif`
+    },
     palette: {
         mode: 'dark',
         primary: {
