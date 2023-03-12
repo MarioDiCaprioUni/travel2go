@@ -20,8 +20,12 @@ export const Image = styled('img')`
   object-fit: cover;
 `;
 
-export const Title = styled('h3')`
+export const ContentWithPadding = styled('div')`
+  padding: 10px;
+`;
 
+export const Title = styled('h3')`
+  margin: 40px 0 20px 0;
 `;
 
 export const StyledTable = styled(Table)`
@@ -29,4 +33,13 @@ export const StyledTable = styled(Table)`
     background: #000000;
     color: #ffffff;
   }
+`;
+
+export const Summary = styled('p')`
+
+`;
+
+export const Link = styled('a')`
+  text-decoration: none;
+  color: ${api => api.theme.palette.primary.main};
 `;

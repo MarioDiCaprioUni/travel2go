@@ -40,7 +40,7 @@ const Index: NextPage = () => {
 
                     {LOCATIONS.map(props =>
                         <motion.div
-                            key={props.title}
+                            key={props.place}
                             variants={cardVariants}
                             transition={{ duration: 0.5 }}
                         >

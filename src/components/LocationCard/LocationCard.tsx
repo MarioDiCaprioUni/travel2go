@@ -26,11 +26,14 @@ import ExtendedLocationCard from "@/components/ExtendedLocationCard/ExtendedLoca
 
 export interface LocationCardProps {
     imageLinks: string[];
-    title: string;
+    place: string;
+    state: string;
     tooltip: string;
     dailyEuros: number;
     coords: geolocation.GeolocationPoint;
+    summary?: string;
 }
+
 
 const LocationCard: React.FC<LocationCardProps> = (props) => {
     const [isExtended, setIsExtended] = useState<boolean>(false);
@@ -64,7 +67,7 @@ const LocationCard: React.FC<LocationCardProps> = (props) => {
             <CardContent>
 
                 <Title>
-                    { props.title }
+                    { props.place + ', ' + props.state }
                 </Title>
 
                 <Content>
